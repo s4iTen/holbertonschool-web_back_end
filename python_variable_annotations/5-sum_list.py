@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-import typing
 """
 this function add each float in the list
 """
+import typing
 
 
 def sum_list(input_list: typing.List[float]) -> float:
