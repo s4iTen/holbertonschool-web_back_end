@@ -6,7 +6,7 @@ import random
 import asyncio
 
 
-async def async_generator():
+async def async_generator() -> float:
     """
     there is no return or parameters
 
