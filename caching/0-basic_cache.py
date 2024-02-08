@@ -6,6 +6,14 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 
 class BasicCache(BaseCaching):
+    """
+    BasicCache class represents a simple caching
+    system without a specific limit.
+    Methods:
+        __init__(): Initializes the BasicCache object.
+        put(key, item): Adds an item to the cache.
+        get(key): Retrieves an item from the cache based on the key.
+    """
     def __init__(self):
         """ this is the Initialization function"""
         super().__init__()
