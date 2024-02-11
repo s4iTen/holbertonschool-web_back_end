@@ -6,6 +6,11 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 
 class FIFOCache(BaseCaching):
+    """
+    __init__():Initializes the BasicCache object.
+    put: Adds an item to the cache.
+    get: Retrieves an item from the cache based on the key.
+    """
     def __init__(self):
         super().__init__()
 
