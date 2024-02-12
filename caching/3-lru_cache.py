@@ -8,16 +8,23 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 class LRUCache(BaseCaching):
     '''
+    LRUCache class
     __init__(): Initializes the LRUCache object.
     put: Adds an item to the cache.
     get: Retrieves an item from the cache based on the key.
     '''
 
     def __init__(self):
+        """
+        this is the initialization method
+        """
         super().__init__()
         self.access_order = OrderedDict()
 
     def put(self, key, item):
+        """
+        this is the put method
+        """
         if key is not None and item is not None:
             # Check if the cache is full
             if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
