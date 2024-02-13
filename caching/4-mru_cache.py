@@ -32,12 +32,8 @@ class MRUCache(BaseCaching):
         # Check if the number of items exceeds the maximum allowed
         if len(self.cache_data) > self.MAX_ITEMS:
             # Find and discard the most recently used item
-            mru_key = self.get_mru_key()
-            del self.cache_data[mru_key]
-            print(f"DISCARD: {mru_key}\n")
-
-    def get_mru_key(self):
-        return next(reversed(self.cache_data))
+            del self.cache_data[key]
+            print(f"DISCARD: {key}\n")
 
     def get(self, key):
         """Get an item by key"""
