@@ -19,7 +19,7 @@
             "email=" +
             email.value +
             ";" +
-            "expires=Thu, 18 Dec 2025 12:00:00 UTC";
+            "expires= 365";
           console.log(document.cookie);
         } else {
           console.error("Error: Firstname and email are required");
@@ -37,7 +37,7 @@
   <body>
     <input type="text" id="firstname" />
     <input type="text" id="email" />
-    <button onclick="setCookies()">setCookies</button>
-    <button onclick="showCookies()">showCookies</button>
+    <button onclick="setCookies()">log me in</button>
+    <button onclick="showCookies()">show the cookies</button>
   </body>
 </html>
