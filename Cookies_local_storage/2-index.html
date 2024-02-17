@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      function setCookies() {
+        const firstname = document.getElementById("firstname");
+        const email = document.getElementById("email");
+
+        if (firstname.value && email.value) {
+          document.cookie =
+            "firstname=" +
+            firstname.value + 
+            " email=" +
+            email.value +
+            ";" +
+            "expires= 10";
+        } else {
+          console.error("Error: Firstname and email are required");
+        }
+      }
+
+      function showCookies() {
+        const p = document.createElement("p");
+        let decodedCookie = decodeURIComponent(document.cookie);
+        console.log(decodedCookie)
+        const split = decodedCookie.split('; ')
+        console.log(split)
+        if (split.length === 2) {
+            const part=split.pop().split(';').shift();
+            const part1 = part.split(' ').slice();
+            const firstname = part1.shift();
+            console.log(firstname)
+            const email = part1.shift(1);
+            console.log(email)
+            const firstname1 = firstname.split('=').pop(0);
+            console.log(firstname1)
+            const email1 = email.split('=').pop(0);
+            console.log(email1);
+            const string = `Email: ${email1} - Firstname: ${firstname1}`
+            p.innerHTML = string
+            document.body.appendChild(p);
+        }
+      }
+      function getCookie(name) {
+        const temp = document.cookie.firstname
+        if (temp === name) {
+            return document.cookie
+        } else { return '' }
+      }
+    </script>
+  </head>
+  <body>
+    <input type="text" id="firstname" />
+    <input type="text" id="email" />
+    <button onclick="setCookies()">log me in</button>
+    <button onclick="showCookies()">show the cookies</button>
+  </body>
+</html>
