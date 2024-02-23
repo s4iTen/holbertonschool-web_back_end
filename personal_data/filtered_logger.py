@@ -57,20 +57,17 @@ def get_logger() -> logging.Logger:
     logger.addHandler(streamHandler)
     return logger
 
-def get_db():
-    """Get a connector to the holberton database."""
-    username = os.getenv("PERSONAL_DATA_DB_USERNAME", "root")
-    password = os.getenv("PERSONAL_DATA_DB_PASSWORD", "")
-    host = os.getenv("PERSONAL_DATA_DB_HOST", "localhost")
-    dbname = os.getenv("PERSONAL_DATA_DB_NAME")
-
-    # Connect to the database
-    connection = mysql.connector.connect(
-        user=username,
-        password=password,
-        host=host,
-        database=dbname
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """ Function for get connection to MYSQL DataBase """
+    dbUser = os.getenv("PERSONAL_DATA_DB_USERNAME")
+    dbPass = os.getenv("PERSONAL_DATA_DB_PASSWORD")
+    dbHost = os.getenv("PERSONAL_DATA_DB_HOST")
+    dbName = os.getenv("PERSONAL_DATA_DB_NAME")
+    dbConnection = mysql.connector.connect(
+        user=dbUser,
+        password=dbPass,
+        host=dbHost,
+        database=dbName
     )
-
-    return connection
+    return dbConnection
 
