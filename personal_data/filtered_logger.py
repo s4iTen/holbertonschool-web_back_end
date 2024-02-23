@@ -7,6 +7,8 @@ import re
 import logging
 import mysql.connector
 import os
+import bcrypt
+
 
 
 def filter_datum(
@@ -84,6 +86,14 @@ def main():
             fields=("name", "email", "ssn", "password"))
         print(formatter.format(log_record))
 
+def hash_password(password):
+    # Generate a random salt
+    salt = bcrypt.gensalt()
+
+    # Hash the password with the salt
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
+
+    return hashed_password
 
 if __name__ == "__main__":
     main()
