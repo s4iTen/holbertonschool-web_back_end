@@ -42,21 +42,20 @@ def forbidden(error) -> str:
 
 @app.before_request
 def before_request():
-    ''' Before request handler
-    '''
+    """before_request function"""
     if auth is None:
         return
-    excluded_paths = ['/api/v1/status/',
-                      '/api/v1/unauthorized/',
-                      '/api/v1/forbidden/']
-    if request.path not in excluded_paths:
-        return auth.require_auth(request, excluded_paths)
-    if auth.authorization_header(request):
+    exist = auth.require_auth(
+        request.path,
+        ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/'])
+    if exist is False:
+        return
+    authorization_header = auth.authorization_header(request)
+    if authorization_header is None:
         abort(401)
-    request.current_user = auth.current_user(request)
-    if auth.current_user(request):
+    current_user = auth.current_user(request)
+    if current_user is None:
         abort(403)
-    return None
 
 
 if __name__ == "__main__":
