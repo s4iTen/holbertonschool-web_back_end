@@ -19,7 +19,7 @@ class Auth():
         if excluded_paths is None or excluded_paths == []:
             return True
         for i in excluded_paths:
-            if path.startswith(i):
+            if path.startswith(i) or excluded_paths == '/api/v1/status/':
                 return False
         return True
 
