@@ -2,6 +2,7 @@
 """ BasicAuth class """
 from api.v1.auth.auth import Auth
 import base64
+import re
 
 
 class BasicAuth(Auth):
@@ -30,11 +31,13 @@ class BasicAuth(Auth):
             return None
 
     def extract_user_credentials(self, decoded_base64_authorization_header):
-        """ extract_user_credentials method """
-        if decoded_base64_authorization_header is None:
+        """extract_user_credentials method"""
+
+        if (decoded_base64_authorization_header is None
+                or type(decoded_base64_authorization_header) != str):
             return None, None
-        if decoded_base64_authorization_header is not str:
+        if (re.search(':', decoded_base64_authorization_header)):
+            res = re.split(':', decoded_base64_authorization_header)
+            return res[0], res[1]
+        else:
             return None, None
-        if ':' not in decoded_base64_authorization_header:
-            return None, None
-        return decoded_base64_authorization_header.split(':', 1)
