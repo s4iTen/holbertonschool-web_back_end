@@ -28,3 +28,13 @@ class BasicAuth(Auth):
             return tem
         except Exception:
             return None
+
+    def extract_user_credentials(self, decoded_base64_authorization_header):
+        """ extract_user_credentials method """
+        if decoded_base64_authorization_header is None:
+            return None, None
+        if decoded_base64_authorization_header is not str:
+            return None, None
+        if ':' not in decoded_base64_authorization_header:
+            return None, None
+        return decoded_base64_authorization_header.split(':', 1)
