@@ -1,12 +1,9 @@
-#!/usr/bin/env python3
 """DB module
 """
-from sqlalchemy import create_engine, update
+from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
-from sqlalchemy.exc import InvalidRequestError
-from sqlalchemy.orm.exc import NoResultFound
 
 from user import Base
 from user import User
@@ -34,9 +31,8 @@ class DB:
         return self.__session
 
     def add_user(self, email: str, hashed_password: str) -> User:
-        """add_user method that returns a user object"""
+        """ Add a new user to the database """
         user = User(email=email, hashed_password=hashed_password)
         self._session.add(user)
         self._session.commit()
         return user
-
