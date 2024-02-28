@@ -3,11 +3,10 @@ from flask import Flask, jsonify
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/", methods=["GET"])
 def hello_world():
     """ this is the route hello message"""
-    data = {"message": "Bienvenue"}
-    return jsonify(data)
+    return jsonify({"message": "Bienvenue"}), 200
 
 
 if __name__ == "__main__":
