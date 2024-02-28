@@ -2,8 +2,6 @@
 from flask import Flask, abort, jsonify
 from auth import Auth
 from flask import request
-import bcrypt
-import secrets
 """ this is the flask app """
 
 app = Flask(__name__)
@@ -32,7 +30,9 @@ def register():
 
 @app.route("/sessions", methods=["POST"])
 def login():
-    """ this is the login function """
+    """
+    this is the login function
+    """
     email = request.form.get("email")
     password = request.form.get("password")
     valid = AUTH.valid_login(email, password)
