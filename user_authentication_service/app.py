@@ -32,7 +32,7 @@ def register():
 
 @app.route("/sessions", methods=["POST"])
 def login():
-    """"""
+    """ this is the login function """
     email = request.form.get("email")
     password = request.form.get("password")
     valid = AUTH.valid_login(email, password)
