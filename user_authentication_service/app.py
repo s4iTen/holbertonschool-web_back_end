@@ -12,7 +12,9 @@ def hello_world():
     """ this is the route hello message"""
     return jsonify({"message": "Bienvenue"}), 200
 
+
 AUTH = Auth()
+
 
 @app.route("/users", methods=["POST"])
 def register():
