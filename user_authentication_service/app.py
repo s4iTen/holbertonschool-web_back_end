@@ -30,15 +30,15 @@ def register():
 
 @app.route("/sessions", methods=["POST"])
 def login():
-    """
-    this is the login function
-    """
+    """this is the login function"""
     email = request.form.get("email")
     password = request.form.get("password")
     valid = AUTH.valid_login(email, password)
     if valid is False:
         abort(401)
-    response = jsonify({"email": email, "message": "logged in successfuly"})
+    session_id = AUTH.create_session(email)
+    response = jsonify({"email": email, "message": "logged in"})
+    response.set_cookie("session_id", session_id)
     return response
 
 
