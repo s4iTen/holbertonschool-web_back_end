@@ -3,7 +3,7 @@
 import bcrypt
 
 
-def hash_password(password: str) -> bytes:
+def _hash_password(password: str) -> bytes:
     """
     this function takes argument password as string
     and returns bytes
