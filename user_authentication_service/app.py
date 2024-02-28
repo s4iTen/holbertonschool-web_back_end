@@ -47,10 +47,11 @@ def logout():
     """this is the logout function"""
     session_id = request.cookies.get("session_id")
     user = AUTH.get_user_from_session_id(session_id)
-    if user is None:
+    if user:
+        AUTH.destroy_session(user.id)
+        return jsonify({"message": "Bienvenue"}), 200
+    else:
         abort(403)
-    AUTH.destroy_session(user.id)
-    return jsonify({"message": "Bienvenue"}), 200
 
 
 @app.route("/profile", methods=["GET"])
