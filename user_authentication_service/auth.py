@@ -27,7 +27,7 @@ class Auth:
         """
         this function takes argument email as string
         and password as string
-        and returns boolean
+        and returns an instance
         """
         try:
             user = self._db.find_user_by(email=email)
