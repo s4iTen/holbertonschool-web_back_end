@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 from flask import Flask, jsonify
+from auth import Auth
+from flask import request
 """ this is the flask app """
+
 app = Flask(__name__)
 
 
@@ -8,6 +11,18 @@ app = Flask(__name__)
 def hello_world():
     """ this is the route hello message"""
     return jsonify({"message": "Bienvenue"}), 200
+
+
+@app.route("/users", methods=["POST"])
+def register():
+    """ this is the route register message"""
+    email = request.form.get("email")
+    password = request.form.get("password")
+    try:
+        Auth.register_user(email, password)
+        return jsonify({"email": email, "message": "user created"}), 200
+    except ValueError:
+        return jsonify({"message": "email already registered"}), 400
 
 
 if __name__ == "__main__":
