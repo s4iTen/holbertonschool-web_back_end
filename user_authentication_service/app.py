@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-from flask import Flask, jsonify
+from flask import Flask, abort, jsonify
 from auth import Auth
 from flask import request
+import bcrypt
+import secrets
 """ this is the flask app """
 
 app = Flask(__name__)
@@ -26,6 +28,18 @@ def register():
         return jsonify({"email": email, "message": "user created"}), 200
     except ValueError:
         return jsonify({"message": "email already registered"}), 400
+
+
+@app.route("/sessions", methods=["POST"])
+def login():
+    """"""
+    email = request.form.get("email")
+    password = request.form.get("password")
+    valid = AUTH.valid_login(email, password)
+    if valid is False:
+        abort(401)
+    response = jsonify({"email": email, "message": "logged in successfuly"})
+    return response
 
 
 if __name__ == "__main__":
