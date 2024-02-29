@@ -2,6 +2,8 @@
 from flask import Flask, abort, jsonify, redirect
 from auth import Auth
 from flask import request
+from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.exc import InvalidRequestError
 """ this is the flask app """
 
 app = Flask(__name__)
@@ -82,11 +84,11 @@ def update_password():
     reset_token = request.form.get("reset_token")
     new_password = request.form.get("new_password")
     try:
-        AUTH.update_password(reset_token, new_password)
-        return jsonify({"email": email, "message": "Password updated"}), 200
-    except ValueError:
+        if email and reset_token and new_password:
+            AUTH.update_password(reset_token, new_password)
+            return jsonify({"email": email, "message": "Password updated"}), 200
+    except (ValueError):
         abort(403)
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
