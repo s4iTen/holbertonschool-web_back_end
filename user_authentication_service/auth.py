@@ -102,7 +102,7 @@ class Auth:
 
     def get_reset_password_token(self, email: str) -> str:
         """
-        this function takes argument email as string
+        this Method takes argument email as string
         and returns a string
         """
         try:
@@ -111,6 +111,6 @@ class Auth:
                 token = _generate_uuid()
                 self._db.update_user(user.id, reset_token=token)
                 return token
-        except NoResultFound:
-            return None
+        except ValueError :
+            raise ValueError
 
