@@ -17,6 +17,12 @@ class TestAccessNestedMap(unittest.TestCase):
         result = access_nested_map(nested_map, path)
         self.assertEqual(result, expected_result)
 
+    def test_access_nested_map_exception(self,
+                                         nested_map, path, expected_exception):
+        """uses @parameterized.expand to test different inputs"""
+        with self.assertRaises(expected_exception):
+            access_nested_map(nested_map, path)
+
 
 if __name__ == '__main__':
     unittest.main()
