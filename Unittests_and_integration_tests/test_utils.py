@@ -2,20 +2,18 @@
 """Test utils.py"""
 import unittest
 from parameterized import parameterized
-from utils import access_nested_map
+from utils import access_nested_map, get_json
 
 
-class TestAccessNestedMap(unittest.TestCase):
-    """Test access_nested_map function"""
+class TestGetJson(unittest.TestCase):
+    """Test get_json function"""
     @parameterized.expand([
-        ({}, ("a",), KeyError),
-        ({"a": 1}, ("a", "b"), KeyError),
+        ("http://example.com", {"payload": True}),
+        ("http://holberton.io", {"payload": False}),
     ])
-    def test_access_nested_map_exception(self,
-                                         nested_map, path, expected_exception):
+    def test_get_json(self, test_url, test_payload):
         """uses @parameterized.expand to test different inputs"""
-        with self.assertRaises(expected_exception):
-            access_nested_map(nested_map, path)
+        self.assertEqual(get_json(test_url), test_payload)
 
 
 if __name__ == '__main__':
