@@ -8,9 +8,8 @@ from utils import access_nested_map
 class TestAccessNestedMap(unittest.TestCase):
     """Test access_nested_map function"""
     @parameterized.expand([
-        ({"a": 1}, ("a",), 1),
-        ({"a": {"b": 2}}, ("a",), {"b": 2}),
-        ({"a": {"b": 2}}, ("a", "b"), 2),
+        ({}, ("a",), KeyError),
+        ({"a": 1}, ("a", "b"), KeyError),
     ])
     def test_access_nested_map(self, nested_map, path, expected_result):
         """Test access_nested_map function"""
