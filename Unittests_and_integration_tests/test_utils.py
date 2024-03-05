@@ -24,5 +24,6 @@ class TestGetJson(unittest.TestCase):
             self.assertEqual(result, test_payload)
             mock_get.reset_mock()
 
+
 if __name__ == '__main__':
     unittest.main()
