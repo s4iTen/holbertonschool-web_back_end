@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """get_json function"""
 import unittest
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 from utils import get_json
 from parameterized import parameterized
 
