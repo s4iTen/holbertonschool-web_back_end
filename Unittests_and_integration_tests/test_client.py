@@ -16,6 +16,7 @@ class TestGithubOrgClient(unittest.TestCase):
     def test_org(self, org_name, mock_get_json):
         """Test the org method"""
         with patch("client.get_json", mock_get_json):
+            """ Test org method """
             client = GithubOrgClient()
             self.assertEqual(client.org(org_name), mock_get_json())
 
