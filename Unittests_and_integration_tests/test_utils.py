@@ -1,9 +1,12 @@
+#!/usr/bin/env python3
+"""get_json function"""
 import unittest
 from unittest.mock import patch, Mock
 import utils
 
-class TestGetJson(unittest.TestCase):
 
+class TestGetJson(unittest.TestCase):
+    """Test cases for the get_json function"""
     @patch('your_module.utils.requests.get')
     def test_get_json(self, mock_get):
         # Define test cases with input parameters and expected results
