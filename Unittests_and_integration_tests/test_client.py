@@ -16,11 +16,15 @@ class TestGithubOrgClient(unittest.TestCase):
     @patch('client.get_json')
     def test_org(self, test_org, mock_json):
         """Test Org Method"""
-        client = GithubOrgClient(test_org)
-        client.org()
-        mock_json.assert_called_once_with(
-            f"https://api.github.com/orgs/{test_org}")
-
+        test_client = GithubOrgClient(test_org)
+        test_return = test_client.org
+        mock_json.assert_called_once_with(test_client.org_url)
+        self.assertEqual(test_return, mock_json.return_value)
+        self.assertEqual(test_return, test_org)
+        self.assertEqual(test_client.org, test_org)
+        self.assertEqual(test_client.org_url,
+                         f"https://api.github.com/orgs/{test_org}")
+ 
     @parameterized.expand([
         ({"license": {"key": "my_license"}}, "my_license", True),
         ({"license": {"key": "other_license"}}, "my_license", False),
