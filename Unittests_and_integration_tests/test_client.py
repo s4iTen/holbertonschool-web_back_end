@@ -53,5 +53,12 @@ class TestGithubOrgClient(unittest.TestCase):
             mock_get_json.assert_called_once()
 
 
+    def test_has_license(self, repo, license_key, expected):
+        """Test Has License Method"""
+        test_class = GithubOrgClient('test')
+        result = test_class.has_license(repo, license_key)
+        self.assertEqual(result, expected)
+
+
 if __name__ == "__main__":
     unittest.main()
