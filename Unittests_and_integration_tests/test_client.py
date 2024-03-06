@@ -42,13 +42,11 @@ class TestGithubOrgClient(unittest.TestCase):
                           new_callable=PropertyMock,
                           return_value='https://api.github.com/'
                           ) as mock_url:
-            test_json = {"repos_url": 'holberton'}
-            test_client = GithubOrgClient(test_json.get("repos_url"))
-            test_return = test_client.public_repos
+            test_client = GithubOrgClient("holberton")
+            test_return = test_client.public_repos()
+            self.assertEqual(test_return, ["holberton"])
             mock_url.assert_called_once
-            self.assertEqual(
-                test_return,
-                mock_url.return_value.get("repos_url"))
+            mock_url.assert_called_once
 
 
 if __name__ == "__main__":
