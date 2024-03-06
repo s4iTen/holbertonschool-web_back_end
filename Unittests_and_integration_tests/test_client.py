@@ -21,19 +21,15 @@ class TestGithubOrgClient(unittest.TestCase):
         mock_json.assert_called_once_with(
             f"https://api.github.com/orgs/{test_org}")
 
-    def test_public_repos_url(self):
-        """Test Public Repos Url Method"""
-        with patch.object(GithubOrgClient, 'org',
-                          new_callable=PropertyMock,
-                          return_value={'repos_url': 'holberton'}
-                          ) as mock_org:
-            test_json = {"repos_url": 'holberton'}
-            test_client = GithubOrgClient(test_json.get("repos_url"))
-            test_return = test_client._public_repos_url
-            mock_org.assert_called_once
-            self.assertEqual(
-                test_return,
-                mock_org.return_value.get("repos_url"))
+    @parameterized.expand([
+        ({"license": {"key": "my_license"}}, "my_license", True),
+        ({"license": {"key": "other_license"}}, "my_license", False),
+    ])
+    def test_has_license(self, repo, license_key, expected) -> None:
+        """Test Has License Method"""
+        test_client = GithubOrgClient(repo)
+        result = test_client.has_license(license_key)
+        self.assertEqual(result, expected)
 
     @patch("client.get_json", return_value=[{"name": "holberton"}])
     def test_public_repos(self, mock_get_json):
@@ -52,15 +48,19 @@ class TestGithubOrgClient(unittest.TestCase):
             mock_url.assert_called_once()
             mock_get_json.assert_called_once()
 
-    @parameterized.expand([
-        ({"license": {"key": "my_license"}}, "my_license", True),
-        ({"license": {"key": "other_license"}}, "my_license", False),
-    ])
-    def test_has_license(self, repo, license_key, expected) -> None:
-        """Test Has License Method"""
-        test_client = GithubOrgClient(repo)
-        result = test_client.has_license(license_key)
-        self.assertEqual(result, expected)
+    def test_public_repos_url(self):
+        """Test Public Repos Url Method"""
+        with patch.object(GithubOrgClient, 'org',
+                          new_callable=PropertyMock,
+                          return_value={'repos_url': 'holberton'}
+                          ) as mock_org:
+            test_json = {"repos_url": 'holberton'}
+            test_client = GithubOrgClient(test_json.get("repos_url"))
+            test_return = test_client._public_repos_url
+            mock_org.assert_called_once
+            self.assertEqual(
+                test_return,
+                mock_org.return_value.get("repos_url"))
 
 
 if __name__ == "__main__":
