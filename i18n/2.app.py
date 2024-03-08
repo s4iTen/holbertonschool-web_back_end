@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """this is the flask app"""
 from flask import Flask, render_template, request, g
-from flask_babel import Babel
+from flask_babel import Babel, _default_selector
 
 app = Flask(__name__)
 babel = Babel(app)
@@ -26,7 +26,9 @@ def index():
 @babel.localeselector
 def get_locale():
     """get locale"""
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    user_languages = request.accept_languages
+    best_match = user_languages.best_match(app.config['LANGUAGES'])
+    return best_match if best_match else _default_selector()
 
 
 if __name__ == '__main__':
