@@ -27,8 +27,7 @@ def index():
 def get_locale():
     """get locale"""
     user_languages = request.accept_languages
-    best_match = user_languages.best_match(app.config['LANGUAGES'])
-    return best_match if best_match else _default_selector()
+    return user_languages.best_match(app.config['LANGUAGES'])
 
 
 if __name__ == '__main__':
