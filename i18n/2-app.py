@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """this is the flask app"""
 from flask import Flask, render_template, request, g
-from flask_babel import Babel, _default_selector
+from flask_babel import Babel
 
 app = Flask(__name__)
 babel = Babel(app)
