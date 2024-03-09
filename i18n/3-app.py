@@ -6,6 +6,8 @@ from flask_babel import Babel, gettext
 
 app = Flask(__name__)
 babel = Babel(app)
+
+
 gettext.__doc__ = "Documentation for gettext"
 
 
