@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ Task 3: Parametrize templates """
 from flask import Flask, render_template, request
-from flask_babel import Babel, gettext as _
+from flask_babel import Babel, gettext
 
 
 app = Flask(__name__)
@@ -9,7 +9,8 @@ app = Flask(__name__)
 babel = Babel(app)
 
 
-_.__doc__ = "Documentation for gettext"
+gettext.__doc__ = "Documentation for gettext"
+"""this is the gettext doc"""
 
 
 class Config(object):
@@ -28,7 +29,6 @@ def index():
     return render_template('3-index.html')
 
 
-@babel.localeselector
 def get_locale():
     """ Getting locale from request.accept_languages """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
