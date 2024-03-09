@@ -33,3 +33,8 @@ def get_locale():
 def gettext(text):
     """Translate text to the currently selected locale."""
     return text
+
+
+if __name__ == "__main__":
+    """this is the main condition"""
+    app.run(host="0.0.0.0", port="5000")
