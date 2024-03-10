@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+  <!-- Include js-cookie library from jsdelivr CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/src/js.cookie.min.js"></script>
+  <script>
+    // Array of available items
+    const availableItems = ['Shampoo', 'Soap', 'Sponge', 'Water'];
+
+    // Check if local storage is available
+    if (typeof(Storage) === 'undefined') {
+      alert('Sorry, your browser does not support Web storage. Try again with a better one.');
+    } else {
+      // Call functions to create the store and display the cart
+      createStore();
+      displayCart();
+    }
+
+    // Function to add item to cart
+    function addItemToCart(item) {
+      // Add item to local storage
+      localStorage.setItem(item, true);
+      // Display updated cart
+      displayCart();
+    }
+
+    // Function to create the store
+    function createStore() {
+      // Create ul element
+      const ul = document.createElement('ul');
+      // Append ul to the body
+      document.body.appendChild(ul);
+
+      // Loop through available items and create list items
+      availableItems.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        // Add click event to call addItemToCart function
+        li.addEventListener('click', () => addItemToCart(item));
+        // Append li to ul
+        ul.appendChild(li);
+      });
+    }
+
+    // Function to display the cart
+    function displayCart() {
+      // Get all keys from local storage
+      const keys = Object.keys(localStorage);
+
+      // Check if the cart is not empty
+      if (keys.length > 0) {
+        const p = document.createElement('p');
+        p.textContent = `You previously had ${keys.length} item(s) in your cart.`;
+        // Append p to the body
+        document.body.appendChild(p);
+      }
+    }
+  </script>
+</head>
+<body>
+  <!-- This space intentionally left blank. DOM is built dynamically with JavaScript. -->
+</body>
+</html>
