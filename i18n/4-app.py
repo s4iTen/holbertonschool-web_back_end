@@ -35,5 +35,10 @@ def get_locale():
         return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 
+def gettext(text):
+    """Translate text to the currently selected locale."""
+    return text
+
+
 if __name__ == '__main__':
     app.run(debug=True)
