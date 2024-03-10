@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ Task 3: Parametrize templates """
 from flask import Flask, render_template, request
-from flask_babel import Babel, gettext
+from flask_babel import Babel
 
 
 app = Flask(__name__)
@@ -26,15 +26,14 @@ def index():
 
 @babel.localeselector
 def get_locale():
-    """Getting locale from request.accept_languages"""
+    """Getting locale from request.args or request.accept_languages"""
     local_lang = request.args.get("locale")
-    supp_lang = app.config["LANGUAGES"]
-    if local_lang in supp_lang:
+
+    if local_lang and local_lang in app.config["LANGUAGES"]:
         return local_lang
     else:
         return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 
-def gettext(text):
-    """Translate text to the currently selected locale."""
-    return text
+if __name__ == '__main__':
+    app.run(debug=True)
