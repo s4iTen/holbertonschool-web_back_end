@@ -26,8 +26,13 @@ def index():
 
 @babel.localeselector
 def get_locale():
-    """ Getting locale from request.accept_languages """
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    """ to determine the best match with our supported languages """
+    localLang = request.args.get('locale')
+    supportLang = app.config['LANGUAGES']
+    if localLang in supportLang:
+        return localLang
+    else:
+        return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 def gettext(text):
