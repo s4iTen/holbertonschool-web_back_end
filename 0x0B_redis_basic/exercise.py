@@ -7,7 +7,7 @@ from functools import wraps
 
 
 def count_calls(method: Callable) -> Callable:
-    """ count_calls method """
+    """ count_calls function """
 
     key = method.__qualname__
 
@@ -42,12 +42,12 @@ class Cache():
             value = fn(value)
 
         return value
-    
+
     def get_str(self, key: str) -> str:
         """ Parameterize the value from redis to str """
         value = self._redis.get(key)
         return value.decode("utf-8")
-    
+
     def get_int(self, key: str) -> int:
         """ Parameterize the value from redis to int """
         value = self._redis.get(key)
