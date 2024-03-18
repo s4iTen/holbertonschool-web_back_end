@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 '''this is the redis exercise'''
 import redis
-from uuid import uuid4, UUID
+from uuid import uuid4
 from typing import Union, Optional, Callable
 from functools import wraps
 
@@ -9,11 +9,10 @@ from functools import wraps
 def count_calls(method: Callable) -> Callable:
     """ count_calls function """
 
-    key = method.__qualname__
-
     @wraps(method)
     def wrapper(self, *args, **kwargs):
         """ Wrapper for decorator functionality """
+        key = method.__qualname__
         self._redis.incr(key)
         return method(self, *args, **kwargs)
 
@@ -26,12 +25,12 @@ class Cache():
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """ this method generate a uniq key value for the
         data that is comming to it and store it"""
         random_key = str(uuid4())
         self._redis.set(random_key, data)
-
         return random_key
 
     def get(self, key: str,
@@ -40,7 +39,6 @@ class Cache():
         value = self._redis.get(key)
         if fn:
             value = fn(value)
-
         return value
 
     def get_str(self, key: str) -> str:
