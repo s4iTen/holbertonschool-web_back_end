@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 '''this is the redis exercise'''
 import redis
-from uuid import uuid4
+from uuid import uuid4, UUID
 from typing import Union, Optional, Callable
 from functools import wraps
 
