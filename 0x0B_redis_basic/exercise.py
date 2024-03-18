@@ -83,6 +83,7 @@ def replay(method: Callable) -> Callable:
         outputs = self._redis.lrange(outputs_key, 0, -1)
         print(f"History of calls for function '{method.__name__}':")
         for i, (input_args, output) in enumerate(zip(inputs, outputs)):
-            print(f"Call {i + 1}: Input: {input_args.decode()}, Output: {output.decode()}")
+            print(f"Call {i + 1}: Input: {input_args.decode()}, Output:
+                  {output.decode()}")
 
     return wrapper
