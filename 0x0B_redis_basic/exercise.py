@@ -70,3 +70,19 @@ class Cache():
         except Exception:
             value = 0
         return value
+
+
+def replay(method: Callable) -> Callable:
+    """Decorator to display history of calls of a particular function"""
+
+    def wrapper(self):
+        """Wrapper function to display history"""
+        inputs_key = method.__qualname__ + ":inputs"
+        outputs_key = method.__qualname__ + ":outputs"
+        inputs = self._redis.lrange(inputs_key, 0, -1)
+        outputs = self._redis.lrange(outputs_key, 0, -1)
+        print(f"History of calls for function '{method.__name__}':")
+        for i, (input_args, output) in enumerate(zip(inputs, outputs)):
+            print(f"Call {i + 1}: Input: {input_args.decode()}, Output: {output.decode()}")
+
+    return wrapper
