@@ -1,2 +1,2 @@
 // 3-all
-db.school.find()
+db.school.find();
