@@ -1,5 +1,7 @@
-const { calculateNumber } = require('./2-calcul_chai.js');
-const { expect } = require('chai');
+const chai = require('chai');
+const calculateNumber = require('./2-calcul_chai.js');
+
+const expect = chai.expect;
 
 describe('calculateNumber function using Chai expect', () => {
     describe('First number rounded', () => {
