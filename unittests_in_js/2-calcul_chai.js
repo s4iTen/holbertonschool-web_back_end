@@ -9,7 +9,7 @@ const calculateNumber = (type, a, b) => {
         case 'SUBTRACT':
             return roundedA - roundedB;
         case 'DIVIDE':
-            return roundedB === 0 ? 'Error' : roundedA / roundedB;
+            return roundedB === 0 || roundedA === 0 ? 'Error' : roundedA / roundedB;
         default:
             throw new Error('Invalid type. Use SUM, SUBTRACT, or DIVIDE.');
     }
