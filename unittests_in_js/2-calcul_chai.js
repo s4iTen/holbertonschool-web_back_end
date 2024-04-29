@@ -1,5 +1,4 @@
-// 2-calcul_chai.js
-
+// 1-calcul.js
 const calculateNumber = (type, a, b) => {
     const roundedA = Math.round(a);
     const roundedB = Math.round(b);
