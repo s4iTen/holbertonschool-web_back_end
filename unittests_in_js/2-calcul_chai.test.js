@@ -6,22 +6,22 @@ const expect = chai.expect;
 describe('calculateNumber function using Chai expect', () => {
     describe('First number rounded', () => {
         it('should return the correct sum when the first number is rounded', () => {
-            expect(calculateNumber(1, 3)).to.equal(4);
+            expect(calculateNumber('SUM', 1, 3)).to.equal(4); // Corrected
             // Add more test cases if needed
         });
     });
 
     describe('Second number rounded', () => {
         it('should return the correct sum when the second number is rounded', () => {
-            expect(calculateNumber(1, 3.7)).to.equal(5);
-            expect(calculateNumber(1.2, 3.7)).to.equal(5);
+            expect(calculateNumber('SUM', 1, 3.7)).to.equal(5); // Corrected
+            expect(calculateNumber('SUM', 1.2, 3.7)).to.equal(5); // Corrected
             // Add more test cases if needed
         });
     });
 
     describe('Both numbers rounded', () => {
         it('should return the correct sum when both numbers are rounded', () => {
-            expect(calculateNumber(1.5, 3.7)).to.equal(6);
+            expect(calculateNumber('SUM', 1.5, 3.7)).to.equal(6); // Corrected
             // Add more test cases if needed
         });
     });
