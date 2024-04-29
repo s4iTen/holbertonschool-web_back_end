@@ -5,11 +5,11 @@ const calculateNumber = (type, a, b) => {
 
     switch (type) {
         case 'SUM':
-            return roundedA + roundedB;
+            return a + b;
         case 'SUBTRACT':
-            return roundedA - roundedB;
+            return a - b;
         case 'DIVIDE':
-            return roundedB === 0 || roundedA === 0 ? 'Error' : roundedA / roundedB;
+            return b === 0 ? 'Error' : a / b;
         default:
             throw new Error('Invalid type. Use SUM, SUBTRACT, or DIVIDE.');
     }
