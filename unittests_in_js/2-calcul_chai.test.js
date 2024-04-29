@@ -1,5 +1,5 @@
-import { calculateNumber } from './2-calcul_chai.js';
-import { expect } from 'chai';
+const { calculateNumber } = require('./2-calcul_chai.js');
+const { expect } = require('chai');
 
 describe('calculateNumber function using Chai expect', () => {
     describe('First number rounded', () => {
